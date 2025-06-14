@@ -1,0 +1,26 @@
+# Ignore OS junk
+.DS_Store
+
+# Ignore editor files
+*.swp
+*.swo
+
+# SSH keys and configs
+.ssh/
+*.pem
+id_rsa*
+
+# VM and ISO stuff
+*.vmdk
+*.nvram
+*.vmem
+*.vmx
+*.iso
+
+# Python/cache
+__pycache__/
+*.pyc
+
+# Vaults and secrets
+*.vault
+*.key
