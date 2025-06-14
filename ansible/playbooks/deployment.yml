@@ -1,0 +1,8 @@
+--- 
+
+- name: Apache Web Server Deployment (via ansible role)
+  hosts: webservers
+  become: True
+  roles:
+    - apache
+

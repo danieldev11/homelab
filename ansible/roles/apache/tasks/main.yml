@@ -1,0 +1,20 @@
+---
+- name: Install Apache
+  dnf:
+    name: httpd
+    update_cache: yes
+    state: present
+  notify: start-service
+
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Deploy custom index.html
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: '0644'
+  notify: restart httpd  
