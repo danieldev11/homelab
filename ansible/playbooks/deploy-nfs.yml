@@ -1,0 +1,13 @@
+---
+
+- name: NFS Server Setup
+  hosts: nfs_server
+  become: yes
+  roles:
+    - nfs
+
+- name: NFS Client Setup
+  hosts: nfs_clients
+  become: yes
+  roles:
+    - nfs_client

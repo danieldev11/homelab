@@ -1,0 +1,35 @@
+---
+
+- name: Install NFS utilities
+  dnf:
+    name: nfs-utils
+    state: present
+
+- name: Enable and Start NFS Server
+  systemd:
+    name: nfs-server
+    enabled: yes
+    state: started
+
+- name: Create Export Directory
+  file:
+    path: /srv/nfs_share
+    state: directory
+    owner: nobody
+    group: nobody
+    mode: "0777" 
+
+- name: Deploy exports file from template
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Export NFS Shares
+
+- name: Export NFS Shares
+  command: exportfs -a
+
+
+    

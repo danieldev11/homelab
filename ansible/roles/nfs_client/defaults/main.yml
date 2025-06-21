@@ -1,0 +1,5 @@
+---
+nfs_ip: 192.168.50.104
+export: /srv/nfs_share
+mount_point: /mnt/nfs_share
+

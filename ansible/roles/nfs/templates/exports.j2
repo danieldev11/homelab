@@ -1,0 +1,5 @@
+# roles/nfs/templates/exports.j2
+# NFS exports for your shared directory
+/srv/nfs_share {% for net in allowed_networks.split() -%}
+  {{ net }}(rw,sync,no_root_squash,no_subtree_check){% if not loop.last %} {% endif %}
+{% endfor %}

@@ -1,0 +1,26 @@
+---
+- name: Ensure mount directory exists
+  file:
+    path: "{{ mount_point }}"
+    state: directory
+  become: true
+
+- name: Remove any existing fstab entries for mount_point
+  replace:
+    path: /etc/fstab
+    regexp: '^[^#].*\s{{ mount_point }}\s.*$'
+    replace: ''
+  become: true
+
+- name: Ensure only correct NFS fstab entry for mount_point
+  lineinfile:
+    path: /etc/fstab
+    regexp: '^[^#].*\s{{ mount_point }}\s'
+    line: "{{ nfs_ip }}:{{ export }} {{ mount_point }} nfs vers=3,defaults 0 0"
+    state: present
+  become: true
+
+- name: Mount all filesystems from fstab
+  command: mount -a
+  become: true
+

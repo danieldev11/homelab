@@ -1,0 +1,5 @@
+---
+- name: Export NFS Shares
+  systemd:
+    name: nfs-server
+    state: restarted
